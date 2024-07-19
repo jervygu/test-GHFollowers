@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0718FC1B2C4A827000687BA1 /* FollowerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718FC1A2C4A827000687BA1 /* FollowerCollectionViewCell.swift */; };
+		0718FC1D2C4A82D800687BA1 /* GHFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718FC1C2C4A82D800687BA1 /* GHFAvatarImageView.swift */; };
 		0791C2352C49EFB100C78259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2342C49EFB100C78259 /* AppDelegate.swift */; };
 		0791C2372C49EFB100C78259 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2362C49EFB100C78259 /* SceneDelegate.swift */; };
 		0791C23F2C49EFB100C78259 /* GHFollowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0791C23D2C49EFB100C78259 /* GHFollowers.xcdatamodeld */; };
@@ -48,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0718FC1A2C4A827000687BA1 /* FollowerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCollectionViewCell.swift; sourceTree = "<group>"; };
+		0718FC1C2C4A82D800687BA1 /* GHFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFAvatarImageView.swift; sourceTree = "<group>"; };
 		0791C2312C49EFB100C78259 /* GHFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0791C2342C49EFB100C78259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0791C2362C49EFB100C78259 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0718FC192C4A824F00687BA1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0718FC1A2C4A827000687BA1 /* FollowerCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0791C2282C49EFB100C78259 = {
 			isa = PBXGroup;
 			children = (
@@ -166,11 +178,13 @@
 		0791C27A2C4A434300C78259 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0718FC192C4A824F00687BA1 /* Cells */,
 				0791C26B2C4A130200C78259 /* GHFButton.swift */,
 				0791C26D2C4A144000C78259 /* GHFTextField.swift */,
 				0791C2712C4A33A900C78259 /* GHFTitleLabel.swift */,
 				0791C2732C4A34CD00C78259 /* GHFBodyLabel.swift */,
 				0791C2752C4A359F00C78259 /* GHFAlertVC.swift */,
+				0718FC1C2C4A82D800687BA1 /* GHFAvatarImageView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -356,7 +370,9 @@
 				0791C2742C4A34CE00C78259 /* GHFBodyLabel.swift in Sources */,
 				0791C23F2C49EFB100C78259 /* GHFollowers.xcdatamodeld in Sources */,
 				0791C2812C4A4D7500C78259 /* User.swift in Sources */,
+				0718FC1D2C4A82D800687BA1 /* GHFAvatarImageView.swift in Sources */,
 				0791C26A2C49FF9000C78259 /* FavoritesListVC.swift in Sources */,
+				0718FC1B2C4A827000687BA1 /* FollowerCollectionViewCell.swift in Sources */,
 				0791C27F2C4A4B9600C78259 /* Follower.swift in Sources */,
 				0791C26C2C4A130200C78259 /* GHFButton.swift in Sources */,
 				0791C2352C49EFB100C78259 /* AppDelegate.swift in Sources */,
