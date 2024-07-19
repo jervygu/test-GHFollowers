@@ -8,12 +8,16 @@
 import Foundation
 
 // MARK: - Follower
-struct Follower: Codable {
+struct Follower: Codable, Hashable {
     let login: String
     let avatarUrl: String
 
 //    enum CodingKeys: String, CodingKey {
 //        case login
 //        case avatarUrl = "avatar_url"
+//    }
+    
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(login)
 //    }
 }
