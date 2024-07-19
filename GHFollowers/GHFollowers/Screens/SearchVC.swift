@@ -14,7 +14,7 @@ class SearchVC: UIViewController {
     let callToActionButton = GHFButton(backgroundColor: .systemGreen, title: "Get Followers")
     
     var isUsernameValid: Bool {
-        return !userNameTextField.text!.isEmpty && userNameTextField.text!.count >= 8
+        return !userNameTextField.text!.isEmpty && userNameTextField.text!.count >= 5
     }
 
     override func viewDidLoad() {
