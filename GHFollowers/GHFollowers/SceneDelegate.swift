@@ -30,8 +30,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemBackground
+        
         tabBarController.tabBar.standardAppearance = appearance
         tabBarController.tabBar.scrollEdgeAppearance = tabBarController.tabBar.standardAppearance
+        
+        // setting UITabBar tintColor
+        UITabBar.appearance().tintColor = .systemGreen
         
         tabBarController.viewControllers = [createSearchNC(), createFavoritesNC()]
         
@@ -66,10 +70,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return nav
     }
     
-    func createNavigationAppearance(with color: UIColor = .systemBackground) -> UINavigationBarAppearance {
+    func createNavigationAppearance(with backgroundColor: UIColor = .systemBackground) -> UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = color
+        appearance.backgroundColor = backgroundColor
+        
+        // setting UINavigationBar tintColor
+        UINavigationBar.appearance().tintColor = .systemGreen
+        
         return appearance
     }
 

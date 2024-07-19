@@ -19,6 +19,7 @@
 		0791C26A2C49FF9000C78259 /* FavoritesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2692C49FF9000C78259 /* FavoritesListVC.swift */; };
 		0791C26C2C4A130200C78259 /* GHFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C26B2C4A130200C78259 /* GHFButton.swift */; };
 		0791C26E2C4A144000C78259 /* GHFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C26D2C4A144000C78259 /* GHFTextField.swift */; };
+		0791C2702C4A28F800C78259 /* FollowerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C26F2C4A28F800C78259 /* FollowerListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		0791C2692C49FF9000C78259 /* FavoritesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListVC.swift; sourceTree = "<group>"; };
 		0791C26B2C4A130200C78259 /* GHFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFButton.swift; sourceTree = "<group>"; };
 		0791C26D2C4A144000C78259 /* GHFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFTextField.swift; sourceTree = "<group>"; };
+		0791C26F2C4A28F800C78259 /* FollowerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				0791C2452C49EFB300C78259 /* Info.plist */,
 				0791C23D2C49EFB100C78259 /* GHFollowers.xcdatamodeld */,
 				0791C2672C49FF5F00C78259 /* SearchVC.swift */,
+				0791C26F2C4A28F800C78259 /* FollowerListVC.swift */,
 				0791C2692C49FF9000C78259 /* FavoritesListVC.swift */,
 				0791C26B2C4A130200C78259 /* GHFButton.swift */,
 				0791C26D2C4A144000C78259 /* GHFTextField.swift */,
@@ -272,6 +275,7 @@
 				0791C26C2C4A130200C78259 /* GHFButton.swift in Sources */,
 				0791C2352C49EFB100C78259 /* AppDelegate.swift in Sources */,
 				0791C26E2C4A144000C78259 /* GHFTextField.swift in Sources */,
+				0791C2702C4A28F800C78259 /* FollowerListVC.swift in Sources */,
 				0791C2372C49EFB100C78259 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

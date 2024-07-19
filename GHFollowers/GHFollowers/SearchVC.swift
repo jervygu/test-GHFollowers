@@ -12,6 +12,10 @@ class SearchVC: UIViewController {
     let logoImageView = UIImageView()
     let userNameTextField = GHFTextField()
     let callToActionButton = GHFButton(backgroundColor: .systemGreen, title: "Get Followers")
+    
+    var isUsernameValid: Bool {
+        return !userNameTextField.text!.isEmpty && userNameTextField.text!.count >= 8
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +35,20 @@ class SearchVC: UIViewController {
     func createDismissKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
+    }
+    
+    @objc func pushFollowersListVC() {
+        
+        guard isUsernameValid else {
+            print("Invalid username!")
+            return
+        }
+        
+        let followersListVC = FollowerListVC()
+        followersListVC.username = userNameTextField.text
+        followersListVC.title = userNameTextField.text
+        
+        navigationController?.pushViewController(followersListVC, animated: true)
     }
     
     func configureLogoImageView() {
@@ -61,6 +79,8 @@ class SearchVC: UIViewController {
     func configureCallToActionButton() {
         view.addSubview(callToActionButton)
         
+        callToActionButton.addTarget(self, action: #selector(pushFollowersListVC), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             callToActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
             callToActionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
@@ -73,7 +93,7 @@ class SearchVC: UIViewController {
 
 extension SearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        pushFollowersListVC()
         return true
     }
 }
