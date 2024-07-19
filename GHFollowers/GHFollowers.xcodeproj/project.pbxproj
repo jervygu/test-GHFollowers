@@ -20,6 +20,10 @@
 		0791C26C2C4A130200C78259 /* GHFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C26B2C4A130200C78259 /* GHFButton.swift */; };
 		0791C26E2C4A144000C78259 /* GHFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C26D2C4A144000C78259 /* GHFTextField.swift */; };
 		0791C2702C4A28F800C78259 /* FollowerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C26F2C4A28F800C78259 /* FollowerListVC.swift */; };
+		0791C2722C4A33A900C78259 /* GHFTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2712C4A33A900C78259 /* GHFTitleLabel.swift */; };
+		0791C2742C4A34CE00C78259 /* GHFBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2732C4A34CD00C78259 /* GHFBodyLabel.swift */; };
+		0791C2762C4A359F00C78259 /* GHFAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2752C4A359F00C78259 /* GHFAlertVC.swift */; };
+		0791C2782C4A3E4C00C78259 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2772C4A3E4C00C78259 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,10 @@
 		0791C26B2C4A130200C78259 /* GHFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFButton.swift; sourceTree = "<group>"; };
 		0791C26D2C4A144000C78259 /* GHFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFTextField.swift; sourceTree = "<group>"; };
 		0791C26F2C4A28F800C78259 /* FollowerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListVC.swift; sourceTree = "<group>"; };
+		0791C2712C4A33A900C78259 /* GHFTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFTitleLabel.swift; sourceTree = "<group>"; };
+		0791C2732C4A34CD00C78259 /* GHFBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFBodyLabel.swift; sourceTree = "<group>"; };
+		0791C2752C4A359F00C78259 /* GHFAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFAlertVC.swift; sourceTree = "<group>"; };
+		0791C2772C4A3E4C00C78259 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +126,10 @@
 				0791C2692C49FF9000C78259 /* FavoritesListVC.swift */,
 				0791C26B2C4A130200C78259 /* GHFButton.swift */,
 				0791C26D2C4A144000C78259 /* GHFTextField.swift */,
+				0791C2712C4A33A900C78259 /* GHFTitleLabel.swift */,
+				0791C2732C4A34CD00C78259 /* GHFBodyLabel.swift */,
+				0791C2752C4A359F00C78259 /* GHFAlertVC.swift */,
+				0791C2772C4A3E4C00C78259 /* UIViewController+Extension.swift */,
 			);
 			path = GHFollowers;
 			sourceTree = "<group>";
@@ -269,7 +281,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0791C2782C4A3E4C00C78259 /* UIViewController+Extension.swift in Sources */,
 				0791C2682C49FF5F00C78259 /* SearchVC.swift in Sources */,
+				0791C2762C4A359F00C78259 /* GHFAlertVC.swift in Sources */,
+				0791C2722C4A33A900C78259 /* GHFTitleLabel.swift in Sources */,
+				0791C2742C4A34CE00C78259 /* GHFBodyLabel.swift in Sources */,
 				0791C23F2C49EFB100C78259 /* GHFollowers.xcdatamodeld in Sources */,
 				0791C26A2C49FF9000C78259 /* FavoritesListVC.swift in Sources */,
 				0791C26C2C4A130200C78259 /* GHFButton.swift in Sources */,
