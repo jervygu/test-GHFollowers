@@ -9,6 +9,7 @@ import UIKit
 
 class FollowerCollectionViewCell: UICollectionViewCell {
     
+    // Different ways of declaration for reusable identifier
     static let reuseId = "FollowerCollectionViewCell"
     static let identifier = String(describing: FollowerCollectionViewCell.self)
     static var reuseIdentifier: String {
