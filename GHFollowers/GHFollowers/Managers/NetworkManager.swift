@@ -18,12 +18,13 @@ enum APError: Error {
 class NetworkManager {
     static let shared = NetworkManager()
     private let baseUrl = "https://api.github.com"
+    let perPage: Int = 100
     let cache = NSCache<NSString, UIImage>()
     
     private init() {}
     
     func getFollowers(for username: String, page: Int, completion: @escaping(Result<[Follower], GHFError>) -> Void) {
-        let endpoint = baseUrl + "/users/\(username)/followers?per_page=30&page=\(page)"
+        let endpoint = baseUrl + "/users/\(username)/followers?per_page=\(perPage)&page=\(page)"
         print(endpoint)
         
         guard let url = URL(string: endpoint) else {

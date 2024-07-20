@@ -33,6 +33,12 @@ class FollowerCollectionViewCell: UICollectionViewCell {
         avatarImageView.downloadImage(from: follower.avatarUrl)
     }
     
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        usernameLabel.text = nil
+//        avatarImageView.image = UIImage(named: "avatar-placeholder")
+//    }
+    
     private func configure() {
         contentView.addSubview(avatarImageView)
         contentView.addSubview(usernameLabel)

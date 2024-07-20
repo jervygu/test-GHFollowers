@@ -27,7 +27,7 @@ class GHFButton: UIButton {
     
     private func configure() {
         layer.cornerRadius = 10
-        setTitleColor(.label, for: .normal)
+        setTitleColor(.white, for: .normal)
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         translatesAutoresizingMaskIntoConstraints = false
         
