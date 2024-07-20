@@ -30,6 +30,7 @@ class FollowerListVC: UIViewController {
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    let searchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,12 +66,12 @@ class FollowerListVC: UIViewController {
     }
     
     func configureSearchController() {
-        let searchController =                                      UISearchController()
         searchController.searchResultsUpdater =                     self
         searchController.searchBar.delegate =                       self
         searchController.searchBar.placeholder =                    "Search a username"
         searchController.obscuresBackgroundDuringPresentation =     false
         navigationItem.searchController =                           searchController
+        // navigationItem.hidesSearchBarWhenScrolling =                false
     }
     
     func getFollowers(username: String, page: Int) {
@@ -93,8 +94,10 @@ class FollowerListVC: UIViewController {
                     return
                 }
                 
-                self.updateData(on: self.followers)
-                
+                DispatchQueue.main.async {
+                    self.updateData(on: self.followers)
+                    self.updateSearchResults(for: self.searchController)
+                }
             case .failure(let error):
                 self.presentGHFAlertOnMainThread(title: "Bad stuff", message: error.rawValue, buttonTitle: "Ok")
             }
@@ -148,7 +151,10 @@ extension FollowerListVC: UICollectionViewDelegate {
 extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+            updateData(on: followers)
+            return
+        }
         filteredFollowers = followers.filter({ $0.login.lowercased().contains(filter.lowercased()) })
         updateData(on: filteredFollowers)
     }
