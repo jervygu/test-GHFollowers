@@ -31,6 +31,7 @@
 		0791C2842C4A562300C78259 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2832C4A562300C78259 /* NetworkManager.swift */; };
 		0791C2872C4A672F00C78259 /* GHFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2862C4A672F00C78259 /* GHFError.swift */; };
 		07BAE7E82C4B469900EB7132 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BAE7E72C4B469900EB7132 /* UIHelper.swift */; };
+		07BAE7F12C4B992100EB7132 /* GHFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BAE7F02C4B992100EB7132 /* GHFEmptyStateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		0791C2832C4A562300C78259 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0791C2862C4A672F00C78259 /* GHFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFError.swift; sourceTree = "<group>"; };
 		07BAE7E72C4B469900EB7132 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		07BAE7F02C4B992100EB7132 /* GHFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFEmptyStateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,13 +182,13 @@
 		0791C27A2C4A434300C78259 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				07BAE7EE2C4B98CB00EB7132 /* Labels */,
+				07BAE7ED2C4B98BA00EB7132 /* ViewControllers */,
+				07BAE7EC2C4B98B100EB7132 /* ImageViews */,
+				07BAE7EB2C4B98AA00EB7132 /* TextFields */,
+				07BAE7EA2C4B98A400EB7132 /* Buttons */,
+				07BAE7E92C4B989D00EB7132 /* Views */,
 				0718FC192C4A824F00687BA1 /* Cells */,
-				0791C26B2C4A130200C78259 /* GHFButton.swift */,
-				0791C26D2C4A144000C78259 /* GHFTextField.swift */,
-				0791C2712C4A33A900C78259 /* GHFTitleLabel.swift */,
-				0791C2732C4A34CD00C78259 /* GHFBodyLabel.swift */,
-				0791C2752C4A359F00C78259 /* GHFAlertVC.swift */,
-				0718FC1C2C4A82D800687BA1 /* GHFAvatarImageView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -234,6 +236,55 @@
 				07BAE7E72C4B469900EB7132 /* UIHelper.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		07BAE7E92C4B989D00EB7132 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				07BAE7F02C4B992100EB7132 /* GHFEmptyStateView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		07BAE7EA2C4B98A400EB7132 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				0791C26B2C4A130200C78259 /* GHFButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		07BAE7EB2C4B98AA00EB7132 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				0791C26D2C4A144000C78259 /* GHFTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		07BAE7EC2C4B98B100EB7132 /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				0718FC1C2C4A82D800687BA1 /* GHFAvatarImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
+		07BAE7ED2C4B98BA00EB7132 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0791C2752C4A359F00C78259 /* GHFAlertVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		07BAE7EE2C4B98CB00EB7132 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				0791C2712C4A33A900C78259 /* GHFTitleLabel.swift */,
+				0791C2732C4A34CD00C78259 /* GHFBodyLabel.swift */,
+			);
+			path = Labels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +419,7 @@
 			files = (
 				0791C2782C4A3E4C00C78259 /* UIViewController+Extension.swift in Sources */,
 				0791C2682C49FF5F00C78259 /* SearchVC.swift in Sources */,
+				07BAE7F12C4B992100EB7132 /* GHFEmptyStateView.swift in Sources */,
 				0791C2762C4A359F00C78259 /* GHFAlertVC.swift in Sources */,
 				0791C2722C4A33A900C78259 /* GHFTitleLabel.swift in Sources */,
 				0791C2742C4A34CE00C78259 /* GHFBodyLabel.swift in Sources */,
