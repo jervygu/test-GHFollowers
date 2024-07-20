@@ -5,7 +5,7 @@
 //  Created by Jervy Umandap on 7/19/24.
 //
 
-import Foundation
+import UIKit
 
 
 enum APError: Error {
@@ -17,7 +17,8 @@ enum APError: Error {
 
 class NetworkManager {
     static let shared = NetworkManager()
-    let baseUrl = "https://api.github.com"
+    private let baseUrl = "https://api.github.com"
+    let cache = NSCache<NSString, UIImage>()
     
     private init() {}
     
