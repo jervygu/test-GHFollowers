@@ -59,6 +59,7 @@ class FollowerListVC: UIViewController {
             case .failure(let error):
                 self.presentGHFAlertOnMainThread(title: "Bad stuff", message: error.rawValue, buttonTitle: "Ok")
             }
+            print("CFGetRetainCount: \(CFGetRetainCount(self))")
         }
     }
     
