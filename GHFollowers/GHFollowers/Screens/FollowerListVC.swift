@@ -151,7 +151,7 @@ extension FollowerListVC: UICollectionViewDelegate {
 //        let follower = (isSearching ? filteredFollowers : followers)[indexPath.item]
         guard let follower = dataSource.itemIdentifier(for: indexPath) else { return }
         
-        let destinationVC = UserInfoVC(username: follower.login)
+        let destinationVC = UserInfoVC()
         destinationVC.username = follower.login
         let navVC = UINavigationController(rootViewController: destinationVC)
         navVC.sheetPresentationController?.prefersGrabberVisible = true
