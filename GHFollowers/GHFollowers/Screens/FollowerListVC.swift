@@ -27,6 +27,7 @@ class FollowerListVC: UIViewController {
     
     var page: Int = 1
     var hasMoreFollowers: Bool = true
+    var isSearching = false
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
@@ -145,17 +146,36 @@ extension FollowerListVC: UICollectionViewDelegate {
         }
         
     }
+    	
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let follower = (isSearching ? filteredFollowers : followers)[indexPath.item]
+        guard let follower = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        let destinationVC = UserInfoVC(username: follower.login)
+        destinationVC.username = follower.login
+        let navVC = UINavigationController(rootViewController: destinationVC)
+        navVC.sheetPresentationController?.prefersGrabberVisible = true
+        present(navVC, animated: true)
+    }
+    
 }
 
 // MARK: - UISearchResultsUpdating, UISearchBarDelegate
 extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+//        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+//            updateData(on: followers)
+//            return
+//        }
+//        filteredFollowers = followers.filter({ $0.login.lowercased().contains(filter.lowercased()) })
+//        updateData(on: filteredFollowers)
+        
+        guard let filter = searchController.searchBar.text?.lowercased(), !filter.isEmpty else {
             updateData(on: followers)
             return
         }
-        filteredFollowers = followers.filter({ $0.login.lowercased().contains(filter.lowercased()) })
+        filteredFollowers = followers.filter({ $0.login.lowercased().contains(filter) })
         updateData(on: filteredFollowers)
     }
     
@@ -163,4 +183,7 @@ extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate {
         updateData(on: followers)
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        updateData(on: followers)
+    }
 }
