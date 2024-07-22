@@ -15,6 +15,7 @@
 		074993AA2C4E420F00924D7C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074993A92C4E420F00924D7C /* Constants.swift */; };
 		074993AC2C4E53DF00924D7C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074993AB2C4E53DF00924D7C /* UIView+Extension.swift */; };
 		074993AE2C4E55EE00924D7C /* GHFItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074993AD2C4E55EE00924D7C /* GHFItemInfoView.swift */; };
+		074993B02C4E619B00924D7C /* GHFItemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074993AF2C4E619B00924D7C /* GHFItemInfoVC.swift */; };
 		0791C2352C49EFB100C78259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2342C49EFB100C78259 /* AppDelegate.swift */; };
 		0791C2372C49EFB100C78259 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2362C49EFB100C78259 /* SceneDelegate.swift */; };
 		0791C23F2C49EFB100C78259 /* GHFollowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0791C23D2C49EFB100C78259 /* GHFollowers.xcdatamodeld */; };
@@ -66,6 +67,7 @@
 		074993A92C4E420F00924D7C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		074993AB2C4E53DF00924D7C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		074993AD2C4E55EE00924D7C /* GHFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFItemInfoView.swift; sourceTree = "<group>"; };
+		074993AF2C4E619B00924D7C /* GHFItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFItemInfoVC.swift; sourceTree = "<group>"; };
 		0791C2312C49EFB100C78259 /* GHFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0791C2342C49EFB100C78259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0791C2362C49EFB100C78259 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			children = (
 				0791C2752C4A359F00C78259 /* GHFAlertVC.swift */,
 				074993A52C4E385800924D7C /* GHFUserInfoHeaderVC.swift */,
+				074993AF2C4E619B00924D7C /* GHFItemInfoVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				0791C2352C49EFB100C78259 /* AppDelegate.swift in Sources */,
 				0791C26E2C4A144000C78259 /* GHFTextField.swift in Sources */,
 				0791C2872C4A672F00C78259 /* GHFError.swift in Sources */,
+				074993B02C4E619B00924D7C /* GHFItemInfoVC.swift in Sources */,
 				074993AE2C4E55EE00924D7C /* GHFItemInfoView.swift in Sources */,
 				07BAE7E82C4B469900EB7132 /* UIHelper.swift in Sources */,
 				074993A62C4E385800924D7C /* GHFUserInfoHeaderVC.swift in Sources */,
