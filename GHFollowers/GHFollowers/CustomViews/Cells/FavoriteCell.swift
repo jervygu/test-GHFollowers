@@ -14,8 +14,8 @@ class FavoriteCell: UITableViewCell {
     static let identifier = String(describing: FollowerCollectionViewCell.self)
     static var reuseIdentifier: String { String(describing: self) }
     
-    let avatarImageView = GHFAvatarImageView(frame: .zero)
-    let usernameLabel = GHFTitleLabel(textAlignment: .left, fontSize: 26)
+    private let avatarImageView = GHFAvatarImageView(frame: .zero)
+    private let usernameLabel = GHFTitleLabel(textAlignment: .left, fontSize: 26)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
