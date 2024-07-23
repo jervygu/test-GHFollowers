@@ -29,7 +29,7 @@ struct User: Codable {
 //    let hireable: Bool
     var bio, twitterUsername: String?
     let publicRepos, publicGists, followers, following: Int
-    let createdAt, updatedAt: String
+    let createdAt, updatedAt: Date
     
     
 }

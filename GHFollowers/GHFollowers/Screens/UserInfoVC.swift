@@ -54,7 +54,7 @@ class UserInfoVC: UIViewController {
                     self.add(childVC: GHFUserInfoHeaderVC(user: user), to: self.headerView)
                     self.add(childVC: GHFRepoItemVC(user: user), to: self.itemViewOne)
                     self.add(childVC: GHFFollowerItemVC(user: user), to: self.itemViewTwo)
-                    self.dateLabel.text = "Github since \(user.createdAt.convertToDisplayFormat())"
+                    self.dateLabel.text = "Github since \(user.createdAt.convertToMonthYearFormat())"
                 }
             case .failure(let error):
                 presentGHFAlertOnMainThread(title: "Something went wrong!", message: error.rawValue, buttonTitle: "Ok")
