@@ -16,6 +16,8 @@ class GHFItemInfoVC: UIViewController {
     
     var user: User!
     
+    weak var userInfoVCDelegate: UserInfoVCDelegate!
+    
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
         self.user = user
@@ -28,9 +30,9 @@ class GHFItemInfoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackgroundView()
+        configureActionButton()
         layoutUI()
         configureStackView()
-        
     }
     
     private func configureBackgroundView() {
@@ -47,6 +49,12 @@ class GHFItemInfoVC: UIViewController {
         stackView.addArrangedSubview(itemInfoViewTwo)
         
     }
+    
+    private func configureActionButton() {
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func actionButtonTapped() {}
     
     private func layoutUI() {
         view.addSubview(stackView)
