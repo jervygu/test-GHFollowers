@@ -39,6 +39,8 @@
 		0791C2812C4A4D7500C78259 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2802C4A4D7500C78259 /* User.swift */; };
 		0791C2842C4A562300C78259 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2832C4A562300C78259 /* NetworkManager.swift */; };
 		0791C2872C4A672F00C78259 /* GHFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791C2862C4A672F00C78259 /* GHFError.swift */; };
+		07A0E83B2C4F37F70047C7B4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0E83A2C4F37F70047C7B4 /* Date+Extension.swift */; };
+		07A0E83D2C4F381A0047C7B4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0E83C2C4F381A0047C7B4 /* String+Extension.swift */; };
 		07BAE7E82C4B469900EB7132 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BAE7E72C4B469900EB7132 /* UIHelper.swift */; };
 		07BAE7F12C4B992100EB7132 /* GHFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BAE7F02C4B992100EB7132 /* GHFEmptyStateView.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +99,8 @@
 		0791C2802C4A4D7500C78259 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0791C2832C4A562300C78259 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0791C2862C4A672F00C78259 /* GHFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFError.swift; sourceTree = "<group>"; };
+		07A0E83A2C4F37F70047C7B4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		07A0E83C2C4F381A0047C7B4 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		07BAE7E72C4B469900EB7132 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		07BAE7F02C4B992100EB7132 /* GHFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFEmptyStateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,6 +231,8 @@
 			children = (
 				0791C2772C4A3E4C00C78259 /* UIViewController+Extension.swift */,
 				074993AB2C4E53DF00924D7C /* UIView+Extension.swift */,
+				07A0E83A2C4F37F70047C7B4 /* Date+Extension.swift */,
+				07A0E83C2C4F381A0047C7B4 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -457,7 +463,9 @@
 				074993AC2C4E53DF00924D7C /* UIView+Extension.swift in Sources */,
 				07BAE7F12C4B992100EB7132 /* GHFEmptyStateView.swift in Sources */,
 				0791C2762C4A359F00C78259 /* GHFAlertVC.swift in Sources */,
+				07A0E83B2C4F37F70047C7B4 /* Date+Extension.swift in Sources */,
 				0791C2722C4A33A900C78259 /* GHFTitleLabel.swift in Sources */,
+				07A0E83D2C4F381A0047C7B4 /* String+Extension.swift in Sources */,
 				0791C2742C4A34CE00C78259 /* GHFBodyLabel.swift in Sources */,
 				0791C23F2C49EFB100C78259 /* GHFollowers.xcdatamodeld in Sources */,
 				0791C2812C4A4D7500C78259 /* User.swift in Sources */,

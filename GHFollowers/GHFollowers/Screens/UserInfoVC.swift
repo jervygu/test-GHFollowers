@@ -12,6 +12,7 @@ class UserInfoVC: UIViewController {
     let headerView =            UIView()
     let itemViewOne =           UIView()
     let itemViewTwo =           UIView()
+    let dateLabel =             GHFBodyLabel(textAlignment: .center)
     
     var itemViews: [UIView] =   []
     
@@ -53,6 +54,7 @@ class UserInfoVC: UIViewController {
                     self.add(childVC: GHFUserInfoHeaderVC(user: user), to: self.headerView)
                     self.add(childVC: GHFRepoItemVC(user: user), to: self.itemViewOne)
                     self.add(childVC: GHFFollowerItemVC(user: user), to: self.itemViewTwo)
+                    self.dateLabel.text = "Github since \(user.createdAt.convertToDisplayFormat())"
                 }
             case .failure(let error):
                 presentGHFAlertOnMainThread(title: "Something went wrong!", message: error.rawValue, buttonTitle: "Ok")
@@ -64,7 +66,7 @@ class UserInfoVC: UIViewController {
         let padding: CGFloat =      20
         let itemHeight: CGFloat =   140
         
-        itemViews = [headerView, itemViewOne, itemViewTwo]
+        itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
         
         for itemView in itemViews {
             view.addSubview(itemView)
@@ -86,6 +88,8 @@ class UserInfoVC: UIViewController {
             itemViewTwo.topAnchor.constraint(equalTo: itemViewOne.bottomAnchor, constant: padding),
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
             
+            dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
     
