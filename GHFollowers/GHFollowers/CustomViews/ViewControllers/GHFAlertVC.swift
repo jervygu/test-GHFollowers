@@ -34,7 +34,8 @@ class GHFAlertVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
-        view.addSubviews(containerView, titleLabel, actionButton, messageLabel)
+        view.addSubview(containerView)
+        containerView.addSubviews(titleLabel, messageLabel, actionButton)
         configureContainerView()
         configureTitleLabel()
         configureActionButton()
