@@ -22,8 +22,7 @@ enum PersistenseManager {
     static func updateWith(favorite: Follower, actionType: PersistenseActionType, completion: @escaping(GHFError?) -> Void ) {
         retrieveFavorites { result in
             switch result {
-            case .success(let favorites):
-                var retrievedFavorites = favorites
+            case .success(var retrievedFavorites):
                 switch actionType {
                 case .add:
                     guard !retrievedFavorites.contains(favorite) else {
