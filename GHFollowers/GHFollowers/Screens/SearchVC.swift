@@ -12,6 +12,7 @@ class SearchVC: UIViewController {
     let logoImageView = UIImageView()
     let userNameTextField = GHFTextField()
     let callToActionButton = GHFButton(backgroundColor: .systemGreen, title: "Get Followers")
+//    var logoImageViewTopConstraint: NSLayoutConstraint!
     
     var isUsernameValid: Bool {
         return !userNameTextField.text!.isEmpty && userNameTextField.text!.count >= 5
@@ -24,16 +25,18 @@ class SearchVC: UIViewController {
         configureLogoImageView()
         configureTextField()
         configureCallToActionButton()
+        setupKeyboardHiding()
         createDismissKeyboardTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        userNameTextField.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func createDismissKeyboardTapGesture() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
     }
     
@@ -49,9 +52,9 @@ class SearchVC: UIViewController {
             return
         }
         
-        let followersListVC = FollowerListVC()
-        followersListVC.username = userNameTextField.text
-        followersListVC.title = userNameTextField.text
+        userNameTextField.resignFirstResponder()
+        
+        let followersListVC = FollowerListVC(username: userNameTextField.text!)
         
         navigationController?.pushViewController(followersListVC, animated: true)
     }
@@ -59,7 +62,11 @@ class SearchVC: UIViewController {
     func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "gh-logo")!
+        logoImageView.image = Images.ghLogo
+        
+//        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
+//        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
+//        logoImageViewTopConstraint.isActive = true
         
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
@@ -105,4 +112,41 @@ extension SearchVC: UITextFieldDelegate {
         pushFollowersListVC()
         return true
     }
+}
+
+// MARK: - SETUP KEYBOARD HIDING
+extension SearchVC {
+    
+    private func setupKeyboardHiding() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        // view.frame.origin.y = view.frame.origin.y - 200
+        guard let userInfo = sender.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+              let currentTextField = UIResponder.currentFirst() as? UITextField else { return }
+        
+        // check if the top of the keyboard is above the bottom of the currently focused textbox
+        let keyboardTopY = keyboardFrame.cgRectValue.origin.y
+        let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
+        let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
+        
+        // if textField bottom is below keyboard bottom - bump the frame up
+        if textFieldBottomY > keyboardTopY {
+            // adjust view up
+            let textBoxY = convertedTextFieldFrame.origin.y
+            let newFrameY = (textBoxY - keyboardTopY / 2) * -1
+            view.frame.origin.y = newFrameY
+        }
+        
+        print("foo - currentTextFieldFrame: \(currentTextField.frame)")
+        print("foo - convertedTextFieldFrame: \(convertedTextFieldFrame)")
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0
+    }
+    
 }

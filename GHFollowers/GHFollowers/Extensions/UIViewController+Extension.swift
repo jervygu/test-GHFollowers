@@ -54,15 +54,15 @@ extension UIViewController {
     func dismissLoadingView() {
         #warning("Try modify later")
         DispatchQueue.main.async {
-//            containerView.removeFromSuperview()
-//            containerView = nil
+            containerView.removeFromSuperview()
+            containerView = nil
             
-            UIView.animate(withDuration: 0.25) {
-                containerView.alpha = 0
-            } completion: { _ in
-                containerView.removeFromSuperview()
-                containerView = nil
-            }
+//            UIView.animate(withDuration: 0.25) {
+//                containerView.alpha = 0
+//            } completion: { _ in
+//                containerView.removeFromSuperview()
+//                containerView = nil
+//            }
         }
     }
     
