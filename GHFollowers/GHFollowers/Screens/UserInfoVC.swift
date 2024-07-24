@@ -7,11 +7,13 @@
 
 import UIKit
 
-protocol UserInfoVCDelegate: AnyObject { // class {
-    func didTapGitHubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+
+// MARK: - UserInfoVCDelegate
+protocol UserInfoVCDelegate: AnyObject {
+    func didRequestFollowers(for username: String)
 }
 
+// MARK: - GHFDataLoadingVC
 class UserInfoVC: GHFDataLoadingVC {
     
     let headerView =            UIView()
@@ -23,7 +25,7 @@ class UserInfoVC: GHFDataLoadingVC {
     
     var username:       String!
     
-    weak var followerListVCDelegate: FollowerListVCDelegate!
+    weak var delegate: UserInfoVCDelegate!
     
 //    init(username: String) {
 //        super.init(nibName: nil, bundle: nil)
@@ -67,15 +69,9 @@ class UserInfoVC: GHFDataLoadingVC {
     }
     
     func configureUIElements(with user: User) {
-        let repoItemVC = GHFRepoItemVC(user: user)
-        repoItemVC.userInfoVCDelegate = self
-        
-        let followerItemVC = GHFFollowerItemVC(user: user)
-        followerItemVC.userInfoVCDelegate = self
-        
         self.add(childVC: GHFUserInfoHeaderVC(user: user), to: self.headerView)
-        self.add(childVC: repoItemVC, to: self.itemViewOne)
-        self.add(childVC: followerItemVC, to: self.itemViewTwo)
+        self.add(childVC: GHFRepoItemVC(user: user, delegate: self), to: self.itemViewOne)
+        self.add(childVC: GHFFollowerItemVC(user: user, delegate: self), to: self.itemViewTwo)
         self.dateLabel.text = "Github since \(user.createdAt.convertToMonthYearFormat())"
     }
     
@@ -97,7 +93,7 @@ class UserInfoVC: GHFDataLoadingVC {
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.heightAnchor.constraint(equalToConstant: 210),
             
             itemViewOne.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             itemViewOne.heightAnchor.constraint(equalToConstant: itemHeight),
@@ -106,7 +102,7 @@ class UserInfoVC: GHFDataLoadingVC {
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
             
             dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18)
+            dateLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -123,7 +119,9 @@ class UserInfoVC: GHFDataLoadingVC {
 
 }
 
-extension UserInfoVC: UserInfoVCDelegate {
+// MARK: - GHFRepoItemVCDelegate
+extension UserInfoVC: GHFRepoItemVCDelegate {
+    
     func didTapGitHubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
             presentGHFAlertOnMainThread(title: "Invalid URL", message: "The user of the user is invalid", buttonTitle: "Ok")
@@ -132,6 +130,11 @@ extension UserInfoVC: UserInfoVCDelegate {
         presentSafariVC(with: url)
     }
     
+}
+
+// MARK: - GHFFollowerItemVCDelegate
+extension UserInfoVC: GHFFollowerItemVCDelegate {
+    
     func didTapGetFollowers(for user: User) {
         // dismiss VC
         // tell the follower list screen the new user
@@ -139,7 +142,7 @@ extension UserInfoVC: UserInfoVCDelegate {
             presentGHFAlertOnMainThread(title: "No Followers", message: "This user has no followers, what a shame 😞.", buttonTitle: "So sad")
             return
         }
-        followerListVCDelegate.didRequestFollowers(for: user.login)
+        delegate.didRequestFollowers(for: user.login)
         dismissVC()
     }
     

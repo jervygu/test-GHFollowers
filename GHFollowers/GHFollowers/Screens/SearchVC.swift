@@ -22,6 +22,7 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
+        view.addSubviews(logoImageView, userNameTextField, callToActionButton)
         configureLogoImageView()
         configureTextField()
         configureCallToActionButton()
@@ -43,7 +44,6 @@ class SearchVC: UIViewController {
     @objc func pushFollowersListVC() {
         
         guard isUsernameValid else {
-            print("Invalid username!")
             if userNameTextField.text!.isEmpty {
                 presentGHFAlertOnMainThread(title: "Empty username!", message: "Please enter a username, we need to know who to look for 😀.", buttonTitle: "Ok")
             } else {
@@ -60,7 +60,6 @@ class SearchVC: UIViewController {
     }
     
     func configureLogoImageView() {
-        view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = Images.ghLogo
         
@@ -77,7 +76,6 @@ class SearchVC: UIViewController {
     }
     
     func configureTextField() {
-        view.addSubview(userNameTextField)
         userNameTextField.delegate = self
         
         #if DEBUG
@@ -93,8 +91,6 @@ class SearchVC: UIViewController {
     }
     
     func configureCallToActionButton() {
-        view.addSubview(callToActionButton)
-        
         callToActionButton.addTarget(self, action: #selector(pushFollowersListVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([

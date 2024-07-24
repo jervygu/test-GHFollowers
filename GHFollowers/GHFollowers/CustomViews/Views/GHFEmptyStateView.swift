@@ -28,12 +28,12 @@ class GHFEmptyStateView: UIView {
     }
     
     private func configure() {
+        addSubviews(messageLabel, logoImageView)
         configurelogoImageView()
         configureMessageLabel()
     }
     
     private func configureMessageLabel() {
-        addSubview(messageLabel)
         messageLabel.numberOfLines = 3
         messageLabel.textColor = .secondaryLabel
         
@@ -50,7 +50,6 @@ class GHFEmptyStateView: UIView {
     }
     
     private func configurelogoImageView() {
-        addSubview(logoImageView)
         logoImageView.image = Images.emptyStateLogo
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         

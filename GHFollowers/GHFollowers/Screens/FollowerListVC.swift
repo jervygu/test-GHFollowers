@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol FollowerListVCDelegate: AnyObject {
-    func didRequestFollowers(for username: String)
-}
-
 class FollowerListVC: GHFDataLoadingVC {
     
     enum Section {
@@ -194,7 +190,7 @@ extension FollowerListVC: UICollectionViewDelegate {
         
         let destinationVC = UserInfoVC()
         destinationVC.username = follower.login
-        destinationVC.followerListVCDelegate = self
+        destinationVC.delegate = self
         let navVC = UINavigationController(rootViewController: destinationVC)
         navVC.sheetPresentationController?.prefersGrabberVisible = true
         present(navVC, animated: true)
@@ -224,7 +220,7 @@ extension FollowerListVC: UISearchResultsUpdating {
 
 
 // MARK: - FollowerListVCDelegate
-extension FollowerListVC: FollowerListVCDelegate {
+extension FollowerListVC: UserInfoVCDelegate {
     func didRequestFollowers(for username: String) {
         self.username = username
         title = username
