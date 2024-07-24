@@ -36,6 +36,12 @@ class FavoriteCell: UITableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        avatarImageView.image = GHFAvatarImageView.placeholderImage
+        usernameLabel.text = nil
+    }
+    
     private func configure() {
         contentView.addSubviews(avatarImageView)
         contentView.addSubviews(usernameLabel)
