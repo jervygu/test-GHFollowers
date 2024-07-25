@@ -89,7 +89,7 @@ class UserInfoVC: GHFDataLoadingVC {
         self.add(childVC: GHFUserInfoHeaderVC(user: user), to: self.headerView)
         self.add(childVC: GHFRepoItemVC(user: user, delegate: self), to: self.itemViewOne)
         self.add(childVC: GHFFollowerItemVC(user: user, delegate: self), to: self.itemViewTwo)
-        self.dateLabel.text = "Github since \(user.createdAt.convertToMonthYearFormat())"
+        self.dateLabel.text = "Github since \(user.createdAt.convertToMonthYearFormatNew())"
     }
     
     func layoutUI() {

@@ -25,7 +25,7 @@ class GHFButton: UIButton {
     
     private func configure() {
         configuration = .tinted()
-        configuration?.cornerStyle = .capsule // .capsule
+        configuration?.cornerStyle = .large
         translatesAutoresizingMaskIntoConstraints = false
     }
     
