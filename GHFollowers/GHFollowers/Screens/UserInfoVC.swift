@@ -62,13 +62,25 @@ class UserInfoVC: GHFDataLoadingVC {
     }
     
     func getUserInfo() {
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.async { self.configureUIElements(with: user) }
-            case .failure(let error):
-                presentGHFAlertOnMainThread(title: "Something went wrong!", message: error.rawValue, buttonTitle: "Ok")
+//        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let user):
+//                DispatchQueue.main.async { self.configureUIElements(with: user) }
+//            case .failure(let error):
+//                presentGHFAlertOnMainThread(title: "Something went wrong!", message: error.rawValue, buttonTitle: "Ok")
+//            }
+//        }
+        Task {
+            do {
+                let user = try await NetworkManager.shared.getUserInfoZZ(for: username)
+                configureUIElements(with: user)
+            } catch {
+                if let error = error as? GHFError {
+                    presentGHFAlert(title: "Something went wrong!", message: error.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
             }
         }
     }
@@ -129,7 +141,7 @@ extension UserInfoVC: GHFRepoItemVCDelegate {
     
     func didTapGitHubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
-            presentGHFAlertOnMainThread(title: "Invalid URL", message: "The user of the user is invalid", buttonTitle: "Ok")
+            presentGHFAlert(title: "Invalid URL", message: "The user of the user is invalid", buttonTitle: "Ok")
             return
         }
         presentSafariVC(with: url)
@@ -144,7 +156,7 @@ extension UserInfoVC: GHFFollowerItemVCDelegate {
         // dismiss VC
         // tell the follower list screen the new user
         guard user.followers != 0 else {
-            presentGHFAlertOnMainThread(title: "No Followers", message: "This user has no followers, what a shame 😞.", buttonTitle: "So sad")
+            presentGHFAlert(title: "No Followers", message: "This user has no followers, what a shame 😞.", buttonTitle: "So sad")
             return
         }
         delegate.didRequestFollowers(for: user.login)

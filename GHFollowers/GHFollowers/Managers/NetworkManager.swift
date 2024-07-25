@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - APError
-enum APError: Error {
-    case invalidURL
-    case unableToComplete
-    case invalidResponse
-    case invalidData
-}
-
 // MARK: - NetworkManager
 class NetworkManager {
     
@@ -30,6 +22,7 @@ class NetworkManager {
         decoder.dateDecodingStrategy = .iso8601
     }
     
+    // MARK: - getFollowers
     func getFollowers(for username: String, page: Int, completion: @escaping(Result<[Follower], GHFError>) -> Void) {
         let endpoint = baseUrl + "/users/\(username)/followers?per_page=\(perPage)&page=\(page)"
         print(endpoint)
@@ -81,6 +74,7 @@ class NetworkManager {
         task.resume()
     }
     
+    // MARK: - getFollowersZZ
     func getFollowersZZ(for username: String, page: Int) async throws -> [Follower] {
         let endpoint = baseUrl + "/users/\(username)/followers?per_page=\(perPage)&page=\(page)"
         print(endpoint)
@@ -103,6 +97,7 @@ class NetworkManager {
         }
     }
     
+    // MARK: - getUserInfo
     func getUserInfo(for username: String, completion: @escaping(Result<User, GHFError>) -> Void) {
         let endpoint = baseUrl + "/users/\(username)"
         
@@ -137,6 +132,28 @@ class NetworkManager {
         task.resume()
     }
     
+    // MARK: - getUserInfoZZ
+    func getUserInfoZZ(for username: String) async throws -> User {
+        let endpoint = baseUrl + "/users/\(username)"
+        
+        guard let url = URL(string: endpoint) else {
+            throw GHFError.invalidUsername
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw GHFError.invalidResponse
+        }
+        
+        do {
+            return try decoder.decode(User.self, from: data)
+        } catch {
+            throw GHFError.invalidData
+        }
+    }
+    
+    // MARK: - downloadImage
     func downloadImage(from urlString: String, completion: @escaping(UIImage?) -> Void) {
         let cacheKey = NSString(string: urlString)
         
@@ -164,5 +181,31 @@ class NetworkManager {
             completion(image)
         }
         task.resume()
+    }
+    
+    // MARK: - downloadImageZZ
+    func downloadImageZZ(from urlString: String) async -> UIImage? {
+        //        let cacheKey = NSString(string: urlString)
+        //        if let image = cache.object(forKey: cacheKey) { return image }
+        //        guard let url = URL(string: urlString) else { return nil }
+        //        do {
+        //            let (data, _) = try await URLSession.shared.data(from: url)
+        //            guard let image = UIImage(data: data) else { return nil }
+        //            cache.setObject(image, forKey: cacheKey)
+        //            return image
+        //        } catch {
+        //            return nil
+        //        }
+        
+        // avoid do/catch block
+        let cacheKey = NSString(string: urlString)
+        if let image = cache.object(forKey: cacheKey) { return image }
+        guard let url = URL(string: urlString),
+              let (data, _) = try? await URLSession.shared.data(from: url),
+              let image = UIImage(data: data) else {
+            return nil
+        }
+        cache.setObject(image, forKey: cacheKey)
+        return image
     }
 }

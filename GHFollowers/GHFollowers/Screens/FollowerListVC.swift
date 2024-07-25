@@ -93,40 +93,14 @@ class FollowerListVC: GHFDataLoadingVC {
         showLoadingView()	
         isLoadingMoreFollowers = true
         
-        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let followers):
-                // check if less than 100, it means theres no more followers to load
-                if followers.count < NetworkManager.shared.perPage { self.hasMoreFollowers = false }
-                
-                self.followers.append(contentsOf: followers)
-                
-                if self.followers.isEmpty {
-                    let message = "This user doesnt have any followers. Go follow them 😀."
-                    DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.updateData(on: self.followers)
-                    self.updateSearchResults(for: self.searchController)
-                }
-            case .failure(let error):
-                self.presentGHFAlertOnMainThread(title: "Bad stuff", message: error.rawValue, buttonTitle: "Ok")
-            }
-            self.isLoadingMoreFollowers = false
-            print("CFGetRetainCount: \(CFGetRetainCount(self))")
-        }
-        
-//        Task {
-//            do {
-//                let followers = try await NetworkManager.shared.getFollowersZZ(for: username, page: page)
-//                
+//        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
+//            guard let self = self else { return }
+//            self.dismissLoadingView()
+//            
+//            switch result {
+//            case .success(let followers):
 //                // check if less than 100, it means theres no more followers to load
-//                if self.followers.count < NetworkManager.shared.perPage { self.hasMoreFollowers = false }
+//                if followers.count < NetworkManager.shared.perPage { self.hasMoreFollowers = false }
 //                
 //                self.followers.append(contentsOf: followers)
 //                
@@ -136,21 +110,49 @@ class FollowerListVC: GHFDataLoadingVC {
 //                    return
 //                }
 //                
-//                updateData(on: self.followers)
-//                updateSearchResults(for: self.searchController)
-//                dismissLoadingView()
-//                
-//            } catch {
-//                if let error = error as? GHFError {
-//                    presentGHFAlert(title: "Bad stuff", message: error.rawValue, buttonTitle: "Ok")
-//                } else {
-//                    presentDefaultError()
+//                DispatchQueue.main.async {
+//                    self.updateData(on: self.followers)
+//                    self.updateSearchResults(for: self.searchController)
 //                }
-//                self.dismissLoadingView()
+//            case .failure(let error):
+//                self.presentGHFAlertOnMainThread(title: "Bad stuff", message: error.rawValue, buttonTitle: "Ok")
 //            }
-//            isLoadingMoreFollowers = false
+//            self.isLoadingMoreFollowers = false
 //            print("CFGetRetainCount: \(CFGetRetainCount(self))")
 //        }
+        Task {
+            do {
+                let followers = try await NetworkManager.shared.getFollowersZZ(for: username, page: page)
+                updateUI(with: followers)
+                dismissLoadingView()
+                isLoadingMoreFollowers = false
+            } catch {
+                if let error = error as? GHFError {
+                    presentGHFAlert(title: "Bad stuff", message: error.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
+                dismissLoadingView()
+                isLoadingMoreFollowers = false
+            }
+            print("CFGetRetainCount: \(CFGetRetainCount(self))")
+        }
+    }
+    
+    func updateUI(with followers: [Follower]) {
+        // check if less than 100, it means theres no more followers to load
+        if followers.count < NetworkManager.shared.perPage { self.hasMoreFollowers = false }
+        
+        self.followers.append(contentsOf: followers)
+        
+        if self.followers.isEmpty {
+            let message = "This user doesnt have any followers. Go follow them 😀."
+            DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
+            return
+        }
+        
+        updateData(on: self.followers)
+        updateSearchResults(for: searchController)
     }
     
     func configureDataSource() {
@@ -175,15 +177,29 @@ class FollowerListVC: GHFDataLoadingVC {
     
     @objc func favoriteButtonTapped() {
         showLoadingView()
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let user):
-                self.addUserToFavorites(user: user)
-            case .failure(let error):
-                self.presentGHFAlertOnMainThread(title: "Something went wrong.", message: error.rawValue, buttonTitle: "Ok")
+//        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+//            guard let self = self else { return }
+//            self.dismissLoadingView()
+//            
+//            switch result {
+//            case .success(let user):
+//                self.addUserToFavorites(user: user)
+//            case .failure(let error):
+//                self.presentGHFAlertOnMainThread(title: "Something went wrong.", message: error.rawValue, buttonTitle: "Ok")
+//            }
+//        }
+        Task {
+            do {
+                let user = try await NetworkManager.shared.getUserInfoZZ(for: username)
+                addUserToFavorites(user: user)
+                dismissLoadingView()
+            } catch {
+                if let error = error as? GHFError {
+                    presentGHFAlert(title: "Something went wrong.", message: error.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
+                dismissLoadingView()
             }
         }
     }

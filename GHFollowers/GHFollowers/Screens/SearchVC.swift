@@ -44,9 +44,9 @@ class SearchVC: UIViewController {
         
         guard isUsernameValid else {
             if userNameTextField.text!.isEmpty {
-                presentGHFAlertOnMainThread(title: "Empty username!", message: "Please enter a username, we need to know who to look for 😀.", buttonTitle: "Ok")
+                presentGHFAlert(title: "Empty username!", message: "Please enter a username, we need to know who to look for 😀.", buttonTitle: "Ok")
             } else {
-                presentGHFAlertOnMainThread(title: "Invalid username!", message: "Please enter a valid username 😀.", buttonTitle: "Ok")
+                presentGHFAlert(title: "Invalid username!", message: "Please enter a valid username 😀.", buttonTitle: "Ok")
             }
             return
         }
