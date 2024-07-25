@@ -7,7 +7,7 @@
 
 import UIKit
 
-
+// MARK: - APError
 enum APError: Error {
     case invalidURL
     case unableToComplete
@@ -15,11 +15,13 @@ enum APError: Error {
     case invalidData
 }
 
+// MARK: - NetworkManager
 class NetworkManager {
-    static let shared = NetworkManager()
-    private let baseUrl = "https://api.github.com"
-    let perPage: Int = 100
-    let cache = NSCache<NSString, UIImage>()
+    
+    static let shared       = NetworkManager()
+    private let baseUrl     = "https://api.github.com"
+    let perPage: Int        = 100
+    let cache               = NSCache<NSString, UIImage>()
     
     private init() {}
     
@@ -31,6 +33,22 @@ class NetworkManager {
             completion(.failure(.invalidUsername))
             return
         }
+        
+        /// Other way of making URL using URLComponents
+        //        var components = URLComponents()
+        //        components.scheme       = "https"
+        //        components.host         = "api.github.com"
+        //        components.path         = "/users/\(username)/followers"
+        //        components.queryItems   = [
+        //            URLQueryItem(name: "per_page", value: String(perPage)),
+        //            URLQueryItem(name: "page", value: String(page))
+        //        ]
+        //
+        //        guard let url = components.url else {
+        //            completion(.failure(.invalidUsername))
+        //            return
+        //        }
+        //        print("components.url \(components.url!)")
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let _ = error {
@@ -62,7 +80,6 @@ class NetworkManager {
     
     func getUserInfo(for username: String, completion: @escaping(Result<User, GHFError>) -> Void) {
         let endpoint = baseUrl + "/users/\(username)"
-        print(endpoint)
         
         guard let url = URL(string: endpoint) else {
             completion(.failure(.invalidUsername))

@@ -23,16 +23,17 @@ class FollowerListVC: GHFDataLoadingVC {
 //            }
 //        }
 //    }
-    var filteredFollowers: [Follower] = []
+    var filteredFollowers: [Follower]   = []
     
-    var page: Int = 1
-    var hasMoreFollowers: Bool = true
-    var isSearching = false
-    var isLoadingMoreFollowers = false
+    var page: Int                       = 1
+    var hasMoreFollowers: Bool          = true
+    var isSearching                     = false
+    var isLoadingMoreFollowers          = false
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
-    let searchController = UISearchController()
+    
+    let searchController                = UISearchController()
     
     init(username: String) {
         super.init(nibName: nil, bundle: nil)
@@ -46,9 +47,9 @@ class FollowerListVC: GHFDataLoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViewController()
         configureCollectionView()
         configureSearchController()
-        configureViewController()
         getFollowers(username: username, page: page)
         configureDataSource()
     }
@@ -61,6 +62,7 @@ class FollowerListVC: GHFDataLoadingVC {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
         let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .done, target: self, action: #selector(favoriteButtonTapped))
         navigationItem.rightBarButtonItem = favoriteButton
     }
@@ -74,22 +76,23 @@ class FollowerListVC: GHFDataLoadingVC {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCollectionViewCell.self, forCellWithReuseIdentifier: FollowerCollectionViewCell.identifier)
         
-        print("FollowerCollectionViewCell.reuseId: \(FollowerCollectionViewCell.reuseId)")
-        print("FollowerCollectionViewCell.identifier: \(FollowerCollectionViewCell.identifier)")
-        print("FollowerCollectionViewCell.reuseIdentifier: \(FollowerCollectionViewCell.reuseIdentifier)")
+        print("FollowerCollectionViewCell.reuseId:          \(FollowerCollectionViewCell.reuseId)")
+        print("FollowerCollectionViewCell.identifier:       \(FollowerCollectionViewCell.identifier)")
+        print("FollowerCollectionViewCell.reuseIdentifier:  \(FollowerCollectionViewCell.reuseIdentifier)")
     }
     
     func configureSearchController() {
-        searchController.searchResultsUpdater =                     self
-        searchController.searchBar.placeholder =                    "Search a username"
-        searchController.obscuresBackgroundDuringPresentation =     false
-        navigationItem.searchController =                           searchController
-        // navigationItem.hidesSearchBarWhenScrolling =                false
+        searchController.searchResultsUpdater                   = self
+        searchController.searchBar.placeholder                  = "Search a username"
+        searchController.obscuresBackgroundDuringPresentation   = false
+        navigationItem.searchController                         = searchController
+        // navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func getFollowers(username: String, page: Int) {
         showLoadingView()	
         isLoadingMoreFollowers = true
+        
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else { return }
             self.dismissLoadingView()
@@ -147,19 +150,23 @@ class FollowerListVC: GHFDataLoadingVC {
             
             switch result {
             case .success(let user):
-                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                PersistenseManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-                    guard let self = self else { return }
-                    
-                    guard let error = error else {
-                        self.presentGHFAlertOnMainThread(title: "Success!", message: "You have successfully favorited this user. 👊🏿", buttonTitle: "Hooray!")
-                        return
-                    }
-                    self.presentGHFAlertOnMainThread(title: "Something went wrong.", message: error.rawValue, buttonTitle: "Ok")
-                }
+                self.addUserToFavorites(user: user)
             case .failure(let error):
                 self.presentGHFAlertOnMainThread(title: "Something went wrong.", message: error.rawValue, buttonTitle: "Ok")
             }
+        }
+    }
+    
+    func addUserToFavorites(user: User) {
+        let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+        PersistenseManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+            guard let self = self else { return }
+            
+            guard let error = error else {
+                self.presentGHFAlertOnMainThread(title: "Success!", message: "You have successfully favorited this user. 👊🏿", buttonTitle: "Hooray!")
+                return
+            }
+            self.presentGHFAlertOnMainThread(title: "Something went wrong.", message: error.rawValue, buttonTitle: "Ok")
         }
     }
     
@@ -167,6 +174,7 @@ class FollowerListVC: GHFDataLoadingVC {
 
 // MARK: - UICollectionViewDelegate
 extension FollowerListVC: UICollectionViewDelegate {
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offsetY =           scrollView.contentOffset.y
         let contentHeight =     scrollView.contentSize.height
@@ -222,9 +230,10 @@ extension FollowerListVC: UISearchResultsUpdating {
 // MARK: - FollowerListVCDelegate
 extension FollowerListVC: UserInfoVCDelegate {
     func didRequestFollowers(for username: String) {
-        self.username = username
-        title = username
-        page = 1
+        self.username   = username
+        title           = username
+        page            = 1
+        
         followers.removeAll()
         filteredFollowers.removeAll()
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)

@@ -49,7 +49,7 @@ class FavoritesListVC: GHFDataLoadingVC {
         tableView.delegate = self
         tableView.dataSource = self
         // tableView.removeExcessCells() // doest need as of this writing, tableview doesnt show separator lines for empty cells
-        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.identifier)
+        tableView.register(FavoriteTableViewCell.self, forCellReuseIdentifier: FavoriteTableViewCell.identifier)
     }
     
     func getFavorites() {
@@ -57,19 +57,21 @@ class FavoritesListVC: GHFDataLoadingVC {
             guard let self = self else { return }
             switch result {
             case .success(let favorites):
-                
-                if favorites.isEmpty {
-                    self.showEmptyStateView(with: "No Favorites? \nAdd one on the followers screen.", in: self.view)
-                } else {
-                    self.favorites = favorites
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.view.bringSubviewToFront(self.tableView)
-                    }
-                }
-                
+                self.updateUI(with: favorites)
             case .failure(let error):
                 self.presentGHFAlertOnMainThread(title: "Something went wrong!", message: error.rawValue, buttonTitle: "Ok")
+            }
+        }
+    }
+    
+    func updateUI(with retrivedFavorites: [Follower]) {
+        if retrivedFavorites.isEmpty {
+            showEmptyStateView(with: "No Favorites? \nAdd one on the followers screen.", in: view)
+        } else {
+            favorites = retrivedFavorites
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
             }
         }
     }
@@ -84,7 +86,7 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.identifier, for: indexPath) as! FavoriteCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.identifier, for: indexPath) as! FavoriteTableViewCell
         let favorite = favorites[indexPath.row]
         cell.set(favorite: favorite)
         return cell

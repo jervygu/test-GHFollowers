@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 extension UITableView {
     
     func reloadDataOnMainThread() {
@@ -17,5 +16,4 @@ extension UITableView {
     func removeExcessCells() {
         tableFooterView = UIView(frame: .zero)
     }
-    
 }

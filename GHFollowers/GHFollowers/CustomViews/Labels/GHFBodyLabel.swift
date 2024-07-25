@@ -32,5 +32,4 @@ class GHFBodyLabel: UILabel {
         lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
     }
-
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class GHFTitleLabel: UILabel {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -31,5 +31,4 @@ class GHFTitleLabel: UILabel {
         lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }
-    
 }

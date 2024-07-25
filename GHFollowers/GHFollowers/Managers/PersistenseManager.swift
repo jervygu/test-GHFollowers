@@ -7,12 +7,14 @@
 
 import Foundation
 
-
+// MARK: - PersistenseActionType
 enum PersistenseActionType {
     case add, remove
 }
 
+// MARK: - PersistenseManager
 enum PersistenseManager {
+    
     static private let defaults = UserDefaults.standard
     
     enum Keys {

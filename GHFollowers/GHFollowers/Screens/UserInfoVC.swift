@@ -16,28 +16,18 @@ protocol UserInfoVCDelegate: AnyObject {
 // MARK: - GHFDataLoadingVC
 class UserInfoVC: GHFDataLoadingVC {
     
-    let scrollView =            UIScrollView()
-    let contentView =           UIView()
+    let scrollView          = UIScrollView()
+    let contentView         = UIView()
     
-    let headerView =            UIView()
-    let itemViewOne =           UIView()
-    let itemViewTwo =           UIView()
-    let dateLabel =             GHFBodyLabel(textAlignment: .center)
+    let headerView          = UIView()
+    let itemViewOne         = UIView()
+    let itemViewTwo         = UIView()
+    let dateLabel           = GHFBodyLabel(textAlignment: .center)
     
-    var itemViews: [UIView] =   []
+    var itemViews: [UIView] = []
     
-    var username:       String!
-    
+    var username: String!
     weak var delegate: UserInfoVCDelegate!
-    
-//    init(username: String) {
-//        super.init(nibName: nil, bundle: nil)
-//        self.username = username
-//    }
-    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +66,7 @@ class UserInfoVC: GHFDataLoadingVC {
             guard let self = self else { return }
             switch result {
             case .success(let user):
-                DispatchQueue.main.async {
-                    self.configureUIElements(with: user)
-                }
+                DispatchQueue.main.async { self.configureUIElements(with: user) }
             case .failure(let error):
                 presentGHFAlertOnMainThread(title: "Something went wrong!", message: error.rawValue, buttonTitle: "Ok")
             }
@@ -93,8 +81,8 @@ class UserInfoVC: GHFDataLoadingVC {
     }
     
     func layoutUI() {
-        let padding: CGFloat =      20
-        let itemHeight: CGFloat =   140
+        let padding: CGFloat        = 20
+        let itemHeight: CGFloat     = 140
         
         itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
         

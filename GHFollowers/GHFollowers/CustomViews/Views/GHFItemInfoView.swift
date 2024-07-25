@@ -14,9 +14,9 @@ enum ItemInfoType {
 
 class GHFItemInfoView: UIView {
 
-    let symbolImageView = UIImageView()
-    let titleLabel = GHFTitleLabel(textAlignment: .left, fontSize: 14)
-    let countLabel = GHFTitleLabel(textAlignment: .center, fontSize: 14)
+    let symbolImageView     = UIImageView()
+    let titleLabel          = GHFTitleLabel(textAlignment: .left, fontSize: 14)
+    let countLabel          = GHFTitleLabel(textAlignment: .center, fontSize: 14)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,20 +55,19 @@ class GHFItemInfoView: UIView {
     func set(itemInfoType: ItemInfoType, with count: Int) {
         switch itemInfoType {
         case .repos:
-            symbolImageView.image =     SFSymbolsImage.repos
-            titleLabel.text =           "Public Repos"
+            symbolImageView.image       = SFSymbolsImage.repos
+            titleLabel.text             = "Public Repos"
         case .gists:
-            symbolImageView.image =     SFSymbolsImage.gists
-            titleLabel.text =           "Public Gists"
-            
+            symbolImageView.image       = SFSymbolsImage.gists
+            titleLabel.text             = "Public Gists"
         case .followers:
-            symbolImageView.image =     SFSymbolsImage.followers
-            titleLabel.text =           "Followers"
+            symbolImageView.image       = SFSymbolsImage.followers
+            titleLabel.text             = "Followers"
         case .following:
-            symbolImageView.image =     SFSymbolsImage.following
-            titleLabel.text =           "Following"
+            symbolImageView.image       = SFSymbolsImage.following
+            titleLabel.text             = "Following"
         }
-        countLabel.text =               String(count)
+        countLabel.text                 = String(count)
     }
     
     

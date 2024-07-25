@@ -9,20 +9,19 @@ import UIKit
 
 class SearchVC: UIViewController {
     
-    let logoImageView = UIImageView()
-    let userNameTextField = GHFTextField()
-    let callToActionButton = GHFButton(backgroundColor: .systemGreen, title: "Get Followers")
-//    var logoImageViewTopConstraint: NSLayoutConstraint!
+    let logoImageView       = UIImageView()
+    let userNameTextField   = GHFTextField()
+    let callToActionButton  = GHFButton(backgroundColor: .systemGreen, title: "Get Followers")
     
     var isUsernameValid: Bool {
-        return !userNameTextField.text!.isEmpty && userNameTextField.text!.count >= 5
+        return !userNameTextField.text!.isEmpty && userNameTextField.text!.count > 2
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
         view.addSubviews(logoImageView, userNameTextField, callToActionButton)
+        
         configureLogoImageView()
         configureTextField()
         configureCallToActionButton()
@@ -63,10 +62,6 @@ class SearchVC: UIViewController {
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = Images.ghLogo
         
-//        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
-//        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
-//        logoImageViewTopConstraint.isActive = true
-        
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -77,13 +72,12 @@ class SearchVC: UIViewController {
     
     func configureTextField() {
         userNameTextField.delegate = self
-        
-        #if DEBUG
-            userNameTextField.text = "sallen0400"
-        #endif
+//        #if DEBUG
+//            userNameTextField.text = "sallen0400"
+//        #endif
         
         NSLayoutConstraint.activate([
-            userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
+            userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48), 
             userNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             userNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             userNameTextField.heightAnchor.constraint(equalToConstant: 50)
@@ -103,6 +97,7 @@ class SearchVC: UIViewController {
 
 }
 
+// MARK: - UITextFieldDelegate
 extension SearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         pushFollowersListVC()

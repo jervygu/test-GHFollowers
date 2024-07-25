@@ -38,8 +38,6 @@ class GHFTextField: UITextField {
         clearButtonMode             = .whileEditing
         
         placeholder                 = "Enter username"
-        
-        
     }
     
 }

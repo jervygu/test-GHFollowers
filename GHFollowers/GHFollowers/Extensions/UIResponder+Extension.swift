@@ -7,8 +7,8 @@
 
 import UIKit
 
-
 extension UIResponder {
+    
     private struct Static {
         static weak var responder: UIResponder?
     }

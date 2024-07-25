@@ -7,13 +7,12 @@
 
 import UIKit
 
-
 class GHFItemInfoVC: UIViewController {
     
-    let stackView = UIStackView()
-    let itemInfoViewOne = GHFItemInfoView()
-    let itemInfoViewTwo = GHFItemInfoView()
-    let actionButton = GHFButton()
+    let stackView           = UIStackView()
+    let itemInfoViewOne     = GHFItemInfoView()
+    let itemInfoViewTwo     = GHFItemInfoView()
+    let actionButton        = GHFButton()
     
     var user: User!
     

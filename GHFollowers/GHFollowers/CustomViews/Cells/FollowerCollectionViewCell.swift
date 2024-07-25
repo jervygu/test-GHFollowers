@@ -10,14 +10,14 @@ import UIKit
 class FollowerCollectionViewCell: UICollectionViewCell {
     
     // Different ways of declaration for reusable identifier
-    static let reuseId = "FollowerCollectionViewCell"
-    static let identifier = String(describing: FollowerCollectionViewCell.self)
+    static let reuseId          = "FollowerCollectionViewCell"
+    static let identifier       = String(describing: FollowerCollectionViewCell.self)
     static var reuseIdentifier: String {
         String(describing: self)
     }
     
-    let avatarImageView = GHFAvatarImageView(frame: .zero)
-    let usernameLabel = GHFTitleLabel(textAlignment: .center, fontSize: 16)
+    let avatarImageView         = GHFAvatarImageView(frame: .zero)
+    let usernameLabel           = GHFTitleLabel(textAlignment: .center, fontSize: 16)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,7 +46,6 @@ class FollowerCollectionViewCell: UICollectionViewCell {
     
     private func configure() {
         contentView.addSubviews(avatarImageView, usernameLabel)
-        
         let padding: CGFloat = 8
         
         NSLayoutConstraint.activate([

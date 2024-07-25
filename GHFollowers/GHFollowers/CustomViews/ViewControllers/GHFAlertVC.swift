@@ -9,10 +9,10 @@ import UIKit
 
 class GHFAlertVC: UIViewController {
     
-    let containerView = GHFAlertContainerView()
-    let titleLabel = GHFTitleLabel(textAlignment: .center, fontSize: 20)
-    let messageLabel = GHFBodyLabel(textAlignment: .center)
-    let actionButton = GHFButton(backgroundColor: .systemPink, title: "Ok")
+    let containerView   = GHFAlertContainerView()
+    let titleLabel      = GHFTitleLabel(textAlignment: .center, fontSize: 20)
+    let messageLabel    = GHFBodyLabel(textAlignment: .center)
+    let actionButton    = GHFButton(backgroundColor: .systemPink, title: "Ok")
     
     var alertTitle: String?
     var message: String?
@@ -36,6 +36,7 @@ class GHFAlertVC: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         view.addSubview(containerView)
         containerView.addSubviews(titleLabel, messageLabel, actionButton)
+        
         configureContainerView()
         configureTitleLabel()
         configureActionButton()
