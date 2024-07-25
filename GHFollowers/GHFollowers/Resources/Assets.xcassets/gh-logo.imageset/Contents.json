@@ -29,10 +29,6 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
       "appearances" : [
         {
           "appearance" : "luminosity",
@@ -53,10 +49,6 @@
       "filename" : "gh-logo-dark@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
     },
     {
       "idiom" : "universal",

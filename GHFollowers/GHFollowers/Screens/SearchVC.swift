@@ -11,7 +11,7 @@ class SearchVC: UIViewController {
     
     let logoImageView       = UIImageView()
     let userNameTextField   = GHFTextField()
-    let callToActionButton  = GHFButton(backgroundColor: .systemGreen, title: "Get Followers")
+    let callToActionButton  = GHFButton(color: .systemGreen, title: "Get Followers", systemImageName: "person.3")
     
     var isUsernameValid: Bool {
         return !userNameTextField.text!.isEmpty && userNameTextField.text!.count > 2
