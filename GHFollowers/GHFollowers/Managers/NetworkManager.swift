@@ -23,7 +23,12 @@ class NetworkManager {
     let perPage: Int        = 100
     let cache               = NSCache<NSString, UIImage>()
     
-    private init() {}
+    let decoder             = JSONDecoder()
+    
+    private init() {
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+    }
     
     func getFollowers(for username: String, page: Int, completion: @escaping(Result<[Follower], GHFError>) -> Void) {
         let endpoint = baseUrl + "/users/\(username)/followers?per_page=\(perPage)&page=\(page)"
@@ -66,9 +71,7 @@ class NetworkManager {
             }
             
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let followers = try decoder.decode([Follower].self, from: data)
+                let followers = try self.decoder.decode([Follower].self, from: data)
                 completion(.success(followers))
             } catch {
                 completion(.failure(.invalidData))
@@ -76,6 +79,28 @@ class NetworkManager {
             
         }
         task.resume()
+    }
+    
+    func getFollowersZZ(for username: String, page: Int) async throws -> [Follower] {
+        let endpoint = baseUrl + "/users/\(username)/followers?per_page=\(perPage)&page=\(page)"
+        print(endpoint)
+        
+        guard let url = URL(string: endpoint) else {
+            throw GHFError.invalidUsername
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw GHFError.invalidResponse
+        }
+        
+        
+        do {
+            return try decoder.decode([Follower].self, from: data)
+        } catch {
+            throw GHFError.invalidData
+        }
     }
     
     func getUserInfo(for username: String, completion: @escaping(Result<User, GHFError>) -> Void) {
@@ -102,10 +127,7 @@ class NetworkManager {
             }
             
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                decoder.dateDecodingStrategy = .iso8601
-                let user = try decoder.decode(User.self, from: data)
+                let user = try self.decoder.decode(User.self, from: data)
                 completion(.success(user))
             } catch {
                 completion(.failure(.invalidData))

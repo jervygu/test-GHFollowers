@@ -120,6 +120,37 @@ class FollowerListVC: GHFDataLoadingVC {
             self.isLoadingMoreFollowers = false
             print("CFGetRetainCount: \(CFGetRetainCount(self))")
         }
+        
+//        Task {
+//            do {
+//                let followers = try await NetworkManager.shared.getFollowersZZ(for: username, page: page)
+//                
+//                // check if less than 100, it means theres no more followers to load
+//                if self.followers.count < NetworkManager.shared.perPage { self.hasMoreFollowers = false }
+//                
+//                self.followers.append(contentsOf: followers)
+//                
+//                if self.followers.isEmpty {
+//                    let message = "This user doesnt have any followers. Go follow them 😀."
+//                    DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
+//                    return
+//                }
+//                
+//                updateData(on: self.followers)
+//                updateSearchResults(for: self.searchController)
+//                dismissLoadingView()
+//                
+//            } catch {
+//                if let error = error as? GHFError {
+//                    presentGHFAlert(title: "Bad stuff", message: error.rawValue, buttonTitle: "Ok")
+//                } else {
+//                    presentDefaultError()
+//                }
+//                self.dismissLoadingView()
+//            }
+//            isLoadingMoreFollowers = false
+//            print("CFGetRetainCount: \(CFGetRetainCount(self))")
+//        }
     }
     
     func configureDataSource() {

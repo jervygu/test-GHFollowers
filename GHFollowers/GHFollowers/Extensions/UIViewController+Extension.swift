@@ -19,6 +19,20 @@ extension UIViewController {
         }
     }
     
+    func presentGHFAlert(title: String, message: String, buttonTitle: String) {
+        let alertVC = GHFAlertVC(alertTitle: title, message: message, buttonTitle: buttonTitle)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        present(alertVC, animated: true)
+    }
+    
+    func presentDefaultError() {
+        let alertVC = GHFAlertVC(alertTitle: "Something went wrong", message: "We were unable to complete your task at this time, please try again.", buttonTitle: "Ok")
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        present(alertVC, animated: true)
+    }
+    
     func presentSafariVC(with url: URL) {
         let safariVC = SFSafariViewController(url: url)
         safariVC.preferredControlTintColor = .systemGreen
