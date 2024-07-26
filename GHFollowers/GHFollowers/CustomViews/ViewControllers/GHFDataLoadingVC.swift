@@ -37,7 +37,6 @@ class GHFDataLoadingVC: UIViewController {
     }
     
     func dismissLoadingView() {
-        #warning("Try modify later")
         DispatchQueue.main.async {
             self.containerView.removeFromSuperview()
             self.containerView = nil
@@ -52,6 +51,11 @@ class GHFDataLoadingVC: UIViewController {
     }
     
     func showEmptyStateView(with message: String, in view: UIView) {
+        view.subviews.forEach { subview in
+            if subview is GHFEmptyStateView {
+                subview.removeFromSuperview()
+            }
+        }
         let emptyStateView = GHFEmptyStateView(message: message)
         emptyStateView.frame = view.bounds
         view.addSubview(emptyStateView)

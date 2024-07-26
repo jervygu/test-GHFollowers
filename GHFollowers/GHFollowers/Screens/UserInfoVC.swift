@@ -39,10 +39,6 @@ class UserInfoVC: GHFDataLoadingVC {
     }
     
     func configureViewController() {
-        if #available(iOS 15, *) {
-            navigationController?.navigationBar.scrollEdgeAppearance = UINavigationBarAppearance()
-        }
-        
         view.backgroundColor = .systemBackground
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         navigationItem.rightBarButtonItem = doneButton

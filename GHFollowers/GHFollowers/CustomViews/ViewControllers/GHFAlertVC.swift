@@ -92,3 +92,7 @@ class GHFAlertVC: UIViewController {
     }
     
 }
+
+#Preview {
+    GHFAlertVC(alertTitle: "Whoa", message: "New Preview feature!", buttonTitle: "Great!")
+}

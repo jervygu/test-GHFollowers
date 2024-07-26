@@ -17,6 +17,7 @@ class FavoritesListVC: GHFDataLoadingVC {
         super.viewDidLoad()
         configureViewController()
         configureTableView()
+        configureClearButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,11 +36,28 @@ class FavoritesListVC: GHFDataLoadingVC {
 //        }
 //    }
     
+    func configureClearButton() {
+        let clearButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(clearButtonTapped))
+        navigationItem.rightBarButtonItem = clearButton
+    }
+    
+    @objc func clearButtonTapped() {
+        let alert = UIAlertController(title: "Are you sure you want to clear favorites?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { action in
+            print("Continue delete")
+        }))
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
+    }
+    
     func configureViewController() {
         view.backgroundColor = .systemBackground
         title = "Favorites"
         
         navigationController?.navigationBar.prefersLargeTitles = true
+        #warning("Favorites list VC table views contents bug in scrolling, come back to fix this")
     }
     
     func configureTableView() {
@@ -108,6 +126,9 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
             guard let error = error else {
                 self.favorites.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
+                if self.favorites.isEmpty {
+                    showEmptyStateView(with: "No Favorites? \nAdd one on the followers screen.", in: view)
+                }
                 return
             }
             

@@ -39,3 +39,8 @@ class GHFButton: UIButton {
         configuration?.imagePlacement = .leading
     }
 }
+
+#Preview {
+    let button = GHFButton(color: .systemBrown, title: "Brown", systemImageName: "person.circle")
+    return button
+}
