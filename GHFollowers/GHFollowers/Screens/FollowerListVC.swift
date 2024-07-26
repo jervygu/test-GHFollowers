@@ -249,7 +249,7 @@ extension FollowerListVC: UICollectionViewDelegate {
         print("height:          \(height)")
         
         if offsetY > contentHeight - height {
-            guard hasMoreFollowers, !isLoadingMoreFollowers else { return }
+            guard hasMoreFollowers, !isLoadingMoreFollowers, !isSearching else { return }
             page += 1
             getFollowers(username: username, page: page)
         }
@@ -302,6 +302,7 @@ extension FollowerListVC: UserInfoVCDelegate {
         
         followers.removeAll()
         filteredFollowers.removeAll()
+        navigationItem.searchController?.searchBar.text = nil
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
         getFollowers(username: username, page: page)
     }
