@@ -36,6 +36,19 @@ class FavoritesListVC: GHFDataLoadingVC {
 //        }
 //    }
     
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        super.updateContentUnavailableConfiguration(using: state)
+        if favorites.isEmpty {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "star")
+            config.text = "No favorites"
+            config.secondaryText = "Add a favorite on the follower screen."
+            contentUnavailableConfiguration = config
+        } else {
+            contentUnavailableConfiguration = nil
+        }
+    }
+    
     func configureClearButton() {
         let clearButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(clearButtonTapped))
         navigationItem.rightBarButtonItem = clearButton
@@ -83,14 +96,21 @@ class FavoritesListVC: GHFDataLoadingVC {
     }
     
     func updateUI(with retrivedFavorites: [Follower]) {
-        if retrivedFavorites.isEmpty {
-            showEmptyStateView(with: "No Favorites? \nAdd one on the followers screen.", in: view)
-        } else {
-            favorites = retrivedFavorites
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.view.bringSubviewToFront(self.tableView)
-            }
+//        if retrivedFavorites.isEmpty {
+//            showEmptyStateView(with: "No Favorites? \nAdd one on the followers screen.", in: view)
+//        } else {
+//            favorites = retrivedFavorites
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//                self.view.bringSubviewToFront(self.tableView)
+//            }
+//        }
+        
+        favorites = retrivedFavorites
+        setNeedsUpdateContentUnavailableConfiguration()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.view.bringSubviewToFront(self.tableView)
         }
     }
 
@@ -126,9 +146,10 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
             guard let error = error else {
                 self.favorites.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
-                if self.favorites.isEmpty {
-                    showEmptyStateView(with: "No Favorites? \nAdd one on the followers screen.", in: view)
-                }
+//                if self.favorites.isEmpty {
+//                    showEmptyStateView(with: "No Favorites? \nAdd one on the followers screen.", in: view)
+//                }
+                setNeedsUpdateContentUnavailableConfiguration()
                 return
             }
             
@@ -137,3 +158,5 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+#Preview { FavoritesListVC() }

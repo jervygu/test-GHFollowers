@@ -59,6 +59,21 @@ class FollowerListVC: GHFDataLoadingVC {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        super.updateContentUnavailableConfiguration(using: state)
+        if followers.isEmpty && !isLoadingMoreFollowers {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "person.slash")
+            config.text = "No followers"
+            config.secondaryText = "This user has no followers, go follow them."
+            contentUnavailableConfiguration = config
+        } else if isSearching && filteredFollowers.isEmpty {
+            contentUnavailableConfiguration = UIContentUnavailableConfiguration.search()
+        } else {
+            contentUnavailableConfiguration = nil
+        }
+    }
+    
     func configureViewController() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -145,14 +160,16 @@ class FollowerListVC: GHFDataLoadingVC {
         
         self.followers.append(contentsOf: followers)
         
-        if self.followers.isEmpty {
-            let message = "This user doesnt have any followers. Go follow them 😀."
-            DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
-            return
-        }
+//        if self.followers.isEmpty {
+//            let message = "This user doesnt have any followers. Go follow them 😀."
+//            DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
+//            return
+//        }
         
         updateData(on: self.followers)
         updateSearchResults(for: searchController)
+        
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
     func configureDataSource() {
@@ -260,11 +277,13 @@ extension FollowerListVC: UISearchResultsUpdating {
         guard let filter = searchController.searchBar.text?.lowercased(), !filter.isEmpty else {
             filteredFollowers.removeAll()
             updateData(on: followers)
+            isSearching = false
             return
         }
         isSearching = true
         filteredFollowers = followers.filter({ $0.login.lowercased().contains(filter) })
         updateData(on: filteredFollowers)
+        setNeedsUpdateContentUnavailableConfiguration()
     }
     
 //    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
